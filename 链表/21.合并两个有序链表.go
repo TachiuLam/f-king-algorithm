@@ -14,6 +14,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
+// 双指针 + 虚拟头节点( 时间复杂度O(N))
 func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
 	res := new(ListNode)
 	p := res // res和p是同一个对象，指向同一地址
