@@ -78,3 +78,7 @@ func merge(list1 *ListNode, list2 *ListNode) *ListNode {
 	}
 	return res.Next
 }
+
+func TestDe(t *testing.T) {
+	t.Log(7/2 + 1)
+}
