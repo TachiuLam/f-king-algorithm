@@ -80,5 +80,19 @@ func merge(list1 *ListNode, list2 *ListNode) *ListNode {
 }
 
 func TestDe(t *testing.T) {
-	t.Log(7/2 + 1)
+	t.Log((7 + 1) >> 1)
+	s := make([]int, 2, 5)
+	t.Log(s[0], s[1])
+	{
+		s := []int{1, 2, 3, 4, 5, 6}
+
+		fmt.Println(s, len(s), cap(s))
+
+		sc := make([]int, 6, 6)
+
+		copy(sc, s)
+		sc[0] = 100
+		fmt.Println(s, len(s), cap(s))
+		fmt.Println(sc, len(sc), cap(sc))
+	}
 }
