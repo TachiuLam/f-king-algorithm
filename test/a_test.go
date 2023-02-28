@@ -96,3 +96,14 @@ func TestDe(t *testing.T) {
 		fmt.Println(sc, len(sc), cap(sc))
 	}
 }
+
+func TestNil(t *testing.T) {
+	{
+		l := &ListNode{}
+		t.Log(l == nil)
+	}
+	{
+		var l *ListNode
+		t.Log(l == nil)
+	}
+}
