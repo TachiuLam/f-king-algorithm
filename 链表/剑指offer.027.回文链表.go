@@ -8,7 +8,7 @@ package 链表
  *     Next *ListNode
  * }
  */
-func isPalindrome(head *ListNode) bool {
+func isPalindrome2(head *ListNode) bool {
 	slow, fast := head, head
 	for fast != nil && fast.Next != nil {
 		slow = slow.Next
