@@ -1,4 +1,4 @@
-package 数组
+package 双指针
 
 // leetcode submit region begin(Prohibit modification and deletion)
 // for 0 <= i < len(s):

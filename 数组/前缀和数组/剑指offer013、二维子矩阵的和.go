@@ -1,4 +1,4 @@
-package 数组
+package 前缀和数组
 
 type NumMatrix2 struct {
 	preSum [][]int

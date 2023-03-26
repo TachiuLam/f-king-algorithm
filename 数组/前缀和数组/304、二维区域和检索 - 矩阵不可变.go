@@ -1,4 +1,4 @@
-package 数组
+package 前缀和数组
 
 /*
 给定一个二维矩阵 matrix，以下类型的多个请求：
