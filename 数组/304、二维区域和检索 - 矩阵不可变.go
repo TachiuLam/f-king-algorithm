@@ -22,7 +22,7 @@ func ConstructorNum(matrix [][]int) NumMatrix {
 	}
 	// 构造二维数组前缀和，计算0，0，i-1，j-1的前缀和，预留0点，便于计算
 	preSum := make([][]int, row+1)
-	for i := 0; i < row; i++ {
+	for i := 0; i <= row; i++ {
 		preSum[i] = make([]int, col+1)
 	}
 	// 计算
