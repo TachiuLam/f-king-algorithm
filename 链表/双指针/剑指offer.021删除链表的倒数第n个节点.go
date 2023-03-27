@@ -1,4 +1,4 @@
-package 链表 //leetcode submit region begin(Prohibit modification and deletion)
+package 双指针 //leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for singly-linked list.
  * type ListNode struct {

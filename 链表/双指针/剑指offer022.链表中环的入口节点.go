@@ -1,4 +1,4 @@
-package 链表
+package 双指针
 
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
@@ -8,13 +8,19 @@ package 链表
  *     Next *ListNode
  * }
  */
-// 快慢指针解法：快指针到达末尾时，慢指针刚好到达中点
-// 时间复杂度O(N)，空间复杂度O(1)
-func middleNode(head *ListNode) *ListNode {
-	fast := head
+func detectCycle2(head *ListNode) *ListNode {
+	fast, slow := head, head
 	for fast != nil && fast.Next != nil {
 		fast = fast.Next.Next
-		head = head.Next
+		slow = slow.Next
+		if fast == slow {
+			p := head
+			for p != slow {
+				p = p.Next
+				slow = slow.Next
+			}
+			return p
+		}
 	}
-	return head
+	return nil
 }
