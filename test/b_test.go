@@ -1,7 +1,9 @@
 package test
 
 import (
+	"context"
 	"testing"
+	"time"
 	"unsafe"
 )
 
@@ -35,4 +37,31 @@ func TestUnsafeSizeof(t *testing.T) {
 	*lang = "Golang"
 
 	t.Log(p)
+}
+
+type MyContext struct {
+	// 这里的 Context 是我 copy 出来的，所以前面不用加 context.
+	context.Context
+}
+
+func TestContext(t *testing.T) {
+	childCancel := true
+
+	parentCtx, parentFunc := context.WithCancel(context.Background())
+	mctx := MyContext{parentCtx}
+
+	childCtx, childFun := context.WithCancel(mctx)
+
+	if childCancel {
+		childFun()
+	} else {
+		parentFunc()
+	}
+
+	t.Log(parentCtx)
+	t.Log(mctx)
+	t.Log(childCtx)
+
+	// 防止主协程退出太快，子协程来不及打印
+	time.Sleep(10 * time.Second)
 }
