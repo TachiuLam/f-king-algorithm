@@ -65,3 +65,50 @@ func TestContext(t *testing.T) {
 	// 防止主协程退出太快，子协程来不及打印
 	time.Sleep(10 * time.Second)
 }
+
+func reverseWords(s string) string {
+	i, j := len(s)-1, len(s)-1
+	res := make([]string, 0)
+
+Task:
+	for i >= 0 {
+		// 去除尾部空格
+		for ; s[i] == ' '; i-- {
+			if i == 0 {
+				break Task
+			}
+		}
+		j = i
+
+		for ; i >= 0 && s[i] != ' '; i-- {
+		}
+		res = append(res, s[i+1:j+1])
+
+		// 指向下个单词结束位置
+		j = i
+	}
+
+	var out string
+	for k := 0; k < len(res); k++ {
+		out = out + res[k]
+		if k != len(res)-1 {
+			out += " "
+		}
+	}
+	return out
+}
+
+func TestReverseString(t *testing.T) {
+	{
+		s := "the sky is blue"
+		t.Log(reverseWords(s))
+	}
+	{
+		s := "a good        example"
+		t.Log(reverseWords(s))
+	}
+	{
+		s := "   hello world!   "
+		t.Log(reverseWords(s))
+	}
+}
