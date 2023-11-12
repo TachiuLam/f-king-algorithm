@@ -1,28 +1,44 @@
 package binary_tree
 
+import "math/rand"
+
 // SortArray 快速排序: 先排序好且分点位置p在数组中的位置，再找下一个p，排序该p在数组的位置
 func SortArray(nums []int) []int {
-	quickSort(nums)
+	length := len(nums)
+	if length <= 1 {
+		return nums
+	}
+	left, right := 0, length-1
+	quickSort(nums, left, right)
 	return nums
 }
 
-func quickSort(nums []int) {
-	if len(nums) <= 1 {
+func quickSort(nums []int, left, right int) {
+	if left >= right {
 		return
 	}
 
-	p := nums[0] // 也可以使用rand包随机选择
-	left, right := -1, len(nums)
-	for left < right {
-		// 找到 p >= nums[left] 的位置，for循环开始时left++，所以初始的left为-1
-		for left++; nums[left] < p; left++ {
+	p := partitionP(nums, left, right)
+	quickSort(nums, left, p-1)
+	quickSort(nums, p+1, right)
+}
+
+func partitionP(nums []int, left, right int) int {
+	pivotIndex := left + rand.Intn(right-left) // 随机选择一个索引作为基准值
+	nums[left], nums[pivotIndex] = nums[pivotIndex], nums[left]
+	p := nums[left]
+
+	i, j := left+1, right
+	for i <= j {
+		for ; i <= right && nums[i] <= p; i++ {
 		}
-		for right--; nums[right] > p; right-- {
+		for ; j > left && nums[j] > p; j-- {
 		}
-		if left < right {
-			nums[left], nums[right] = nums[right], nums[left]
+		if i > j {
+			break
 		}
+		nums[i], nums[j] = nums[j], nums[i]
 	}
-	quickSort(nums[:right+1])
-	quickSort(nums[right+1:])
+	nums[left], nums[j] = nums[j], nums[left]
+	return j
 }
