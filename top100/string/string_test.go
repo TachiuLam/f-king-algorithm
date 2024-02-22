@@ -33,3 +33,36 @@ func Test_isValid(t *testing.T) {
 	assert.Equal(t, isValid("([)"), false)
 	assert.Equal(t, isValid("([)]"), false)
 }
+
+func Test_longestPalindrome(t *testing.T) {
+	var longestPalindrome func(s string) string
+	longestPalindrome = func(s string) string {
+		res := ""
+		for i := 0; i < len(s)-1; i++ {
+			s1 := findP(s, i, i)
+			s2 := findP(s, i, i+1)
+			if len(s1) > len(res) {
+				res = s1
+			}
+			if len(s2) > len(res) {
+				res = s2
+			}
+		}
+		return res
+	}
+	assert.Equal(t, longestPalindrome("abc"), "a")
+	assert.Equal(t, longestPalindrome("abcba"), "abcba")
+	assert.Equal(t, longestPalindrome("abadefef"), "aba")
+	assert.Equal(t, longestPalindrome("sdeaaf"), "aa")
+}
+
+func findP(s string, l, r int) string {
+	if len(s) == 1 {
+		return s
+	}
+	for l >= 0 && r < len(s) && s[l] == s[r] {
+		l--
+		r++
+	}
+	return s[l+1 : r]
+}
